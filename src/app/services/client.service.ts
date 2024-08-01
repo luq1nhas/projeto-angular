@@ -35,7 +35,7 @@ export class ClientService {
   }
 
   addClient(newClient: { [key: string]: any }) {
-    fetch(this.cadastroURL, {
+   return fetch(this.cadastroURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,9 +45,9 @@ export class ClientService {
     }).then((response) => response.json());
   }
 
-  updateClient(updatedClient: { [key: string]: any }) {
+  editClient(updatedClient: { [key: string]: any }) {
     const url = `${this.cadastroURL}/${updatedClient['id']}`;
-    fetch(url, {
+   return fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -56,19 +56,9 @@ export class ClientService {
       body: JSON.stringify(updatedClient),
     }).then((response) => response.json());
   }
-  
-  deleteClient(clientId: number) {
-    const url = `${this.cadastroURL}/${clientId}`;
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${this.getToken()}`,
-      },
-    });
-  }
 
   listClients() {
-    fetch(this.cadastroURL, {
+    return fetch(this.cadastroURL, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,
@@ -78,7 +68,7 @@ export class ClientService {
 
   getClientDetails(clientId: number) {
     const url = `${this.cadastroURL}/${clientId}`;
-    fetch(url, {
+    return fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,

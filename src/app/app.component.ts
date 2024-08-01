@@ -12,6 +12,5 @@ export class AppComponent {
 
   constructor(private router: Router, private clientService: ClientService) {
     this.clientService.login();
-    this.clientService.listClients()
   }
 }

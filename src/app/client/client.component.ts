@@ -1,31 +1,27 @@
-import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { Component, ViewChild } from '@angular/core';
+import { ClientService } from '../services/client.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface Value {
   value: string;
   viewValue: string;
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+interface Client {
+  id: number;
+  nome: string;
+  ativo: boolean;
+  fantasia: string;
+  cpf_cnpj: string;
+  rg_ie: string;
+  tipo_pessoa: string;
+  tipo_cadastro: string;
+  cadastro_tipo_id: number;
+  fone: string;
+  chk_alterar_nome: boolean;
+  desconto_auto_aplicar: boolean;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
 
 @Component({
   selector: 'app-client',
@@ -33,6 +29,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./client.component.css'],
 })
 export class ClientComponent {
+  client: Client[] = [];
+  dataSource: any;
+  displayedColumns: string[] = [
+    'code',
+    'name',
+    'fantasy',
+    'cpf/cnpj',
+    'status',
+  ];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private clientService: ClientService) {
+    this.loadListClients()
+  }
+
+ loadListClients() {
+    this.clientService.listClients().then(response => {
+      this.client = response.itens;
+      this.dataSource = new MatTableDataSource(this.client);
+      this.dataSource.paginator = this.paginator;
+      console.log(response)
+    });
+  }
+
   personType: Value[] = [
     { value: 'fisica', viewValue: 'Física' },
     { value: 'jurifica', viewValue: 'Jurídica' },
@@ -43,7 +63,4 @@ export class ClientComponent {
     { value: 'ativos', viewValue: 'Ativos' },
     { value: 'invativos', viewValue: 'Inativos' },
   ];
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
 }
