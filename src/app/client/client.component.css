@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  margin: auto;
+  background-color: #f1f3f4;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.home-nav {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.item-title {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 500;
+  color: #333;
+}
+
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  margin-right: 10px;
+}
+
+.add-button {
+  margin-left: 10px;
+}
+
+.form-card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end; /* Garante que todos os itens estejam alinhados pela parte inferior */
+}
+
+.form-field {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-button {
+  align-self: flex-start; /* Alinha o botão de pesquisa com o início dos campos */
+  margin-top: 16px; /* Ajusta a posição do botão para alinhar visualmente com os campos */
+}
+
+.table-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-table {
+  width: 100%;
+}
