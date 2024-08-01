@@ -1,12 +1,88 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientService {
-
   private loginURL = 'https://desenvolvimento.maxdata.com.br/api/v1/Auth/login';
-  private cadastroURL = 'https://desenvolvimento.maxdata.com.br/api/v1/Cadastro';
+  private cadastroURL =
+    'https://desenvolvimento.maxdata.com.br/api/v1/Cadastro';
 
-  constructor() { }
+  constructor() {}
+
+  login() {
+    const loginData = {
+      email: 'usuarioteste@maxdata.com.br',
+      senha: 'j>grr@je',
+    };
+
+    return fetch(this.loginURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.access_token) {
+          localStorage.setItem('access_token', data.access_token);
+        }
+      });
+  }
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  addClient(newClient: { [key: string]: any }) {
+    fetch(this.cadastroURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+      body: JSON.stringify(newClient),
+    }).then((response) => response.json());
+  }
+
+  updateClient(updatedClient: { [key: string]: any }) {
+    const url = `${this.cadastroURL}/${updatedClient['id']}`;
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+      body: JSON.stringify(updatedClient),
+    }).then((response) => response.json());
+  }
+  
+  deleteClient(clientId: number) {
+    const url = `${this.cadastroURL}/${clientId}`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    });
+  }
+
+  listClients() {
+    fetch(this.cadastroURL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    }).then((response) => response.json());
+  }
+
+  getClientDetails(clientId: number) {
+    const url = `${this.cadastroURL}/${clientId}`;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    }).then((response) => response.json());
+  }
 }
