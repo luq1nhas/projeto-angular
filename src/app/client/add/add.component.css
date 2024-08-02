@@ -24,6 +24,7 @@
   width: 150px;
   height: auto;
   margin-right: 20px;
+  color: red;
 }
 
 .item-title {
@@ -40,19 +41,23 @@
 }
 
 .form-field {
-  flex: 1; 
+  flex: 1;
   margin: 10px;
   height: 50px;
 }
 
-.container-principal{
+.mat-card-title {
+  color: red;
+}
+
+.container-principal {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 25px;
 }
 
-.container-endereco{
+.container-endereco {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -30,7 +30,6 @@
   font-size: 24px;
   margin: 0;
   font-weight: 500;
-  color: #333;
 }
 
 .container-client {
@@ -40,21 +39,44 @@
 }
 
 .form-field {
-  flex: 1; 
+  flex: 1;
   margin: 10px;
   height: 50px;
 }
 
-.container-principal{
+.mat-card-title {
+  color: red;
+}
+
+.container-principal {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 25px;
 }
 
-.container-endereco{
+.container-endereco {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 25px;
+}
+
+.save-button{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.container-button{
+  display: flex;
+  justify-content: end;
+}
+
+.delete-button{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 5px;
 }

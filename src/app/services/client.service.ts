@@ -7,7 +7,7 @@ export class ClientService {
   private loginURL = 'https://desenvolvimento.maxdata.com.br/api/v1/Auth/login';
   private cadastroURL =
     'https://desenvolvimento.maxdata.com.br/api/v1/Cadastro';
-  private cepURL = 'https://opencep.com/v1'
+  private cepURL = 'https://opencep.com/v1';
 
   constructor() {}
 
@@ -36,7 +36,7 @@ export class ClientService {
   }
 
   addClient(newClient: { [key: string]: any }) {
-   return fetch(this.cadastroURL, {
+    return fetch(this.cadastroURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,9 +46,9 @@ export class ClientService {
     }).then((response) => response.json());
   }
 
-  editClient(updatedClient: { [key: string]: any }) {
+  updateClient(updatedClient: { [key: string]: any }, id: string) {
     const url = `${this.cadastroURL}/${updatedClient['id']}`;
-   return fetch(url, {
+    return fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -77,10 +77,10 @@ export class ClientService {
     }).then((response) => response.json());
   }
 
-  getCEP(cep:any){
-    const url = `${this.cepURL}/${cep}`
-    return fetch(url,{
-      method: 'GET'
-    }).then((response) => response.json())
+  getCEP(cep: any) {
+    const url = `${this.cepURL}/${cep}`;
+    return fetch(url, {
+      method: 'GET',
+    }).then((response) => response.json());
   }
 }

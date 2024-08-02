@@ -6,12 +6,16 @@ interface Value {
   value: string;
   view_value: string;
 }
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  styleUrls: ['./edit.component.css'],
 })
-export class EditComponent implements OnInit{
+export class EditComponent implements OnInit {
+  clientData: any;
+  adressData: any;
+
   id: number = 0;
   registerType: string = '';
   personType: string = '';
@@ -33,6 +37,7 @@ export class EditComponent implements OnInit{
   number: string = '';
   iePR: string = '';
   description: string = '';
+  adressIBGE: string = 'F';
 
   registersType: Value[] = [
     { value: 'Cliente', view_value: 'Cliente' },
@@ -62,14 +67,18 @@ export class EditComponent implements OnInit{
     { value: '2', view_value: 'Não Contribuinte' },
     { value: '3', view_value: 'Produtor Rural' },
   ];
+
   constructor(
     private clientService: ClientService,
     private routeId: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.id = parseInt(this.routeId.snapshot.paramMap.get('id') || '0', 0);
+    this.id = parseInt(this.routeId.snapshot.paramMap.get('id') || '0', 10);
     this.clientService.getClientDetails(this.id).then((response: any) => {
+      this.clientData = response;
+      this.adressData = response.cadastro_endereco_padrao;
+
       const indexValueRegister = this.registersType.findIndex(
         (value) => value.value === response.tipo_cadastro
       );
@@ -96,12 +105,14 @@ export class EditComponent implements OnInit{
       this.clientCellphone = response.celular;
       this.cep = response.cadastro_endereco_padrao.endereco_cep;
       this.uf = response.cadastro_endereco_padrao.endereco_uf_sigla;
-      this.country = response.cadastro_endereco_padrao.endereco_municipio_descricao;
+      this.country =
+        response.cadastro_endereco_padrao.endereco_municipio_descricao;
       this.adress = response.cadastro_endereco_padrao.endereco;
       this.neighborhood = response.cadastro_endereco_padrao.endereco_bairro;
       this.number = response.cadastro_endereco_padrao.endereco_numero;
       this.iePR = response.cadastro_endereco_padrao.ie_produtor_rural;
       this.description = response.cadastro_endereco_padrao.descricao;
+      this.adressIBGE = response.cadastro_endereco_padrao.endereco_municipio_codigo_ibge;
     });
   }
 
@@ -114,5 +125,41 @@ export class EditComponent implements OnInit{
       this.adress = response.logradouro;
       this.uf = response.uf;
     });
+  }
+
+  saveData() {
+    let clientsData = {
+      ...this.clientData,
+      id: this.id,
+      nome: this.clientName,
+      fantasia: this.clientFantasy,
+      tipo_pessoa: this.personType,
+      tipo_cadastro: this.registerType,
+      cadastro_tipo_id: parseInt(this.clientType),
+      cpf_cnpj: this.clientCPF_CNPJ,
+      rg_ie: this.clientRG,
+      fone: this.clientPhone,
+      celular: this.clientCellphone,
+      chk_alterar_nome: Boolean(this.alterName),
+      desconto_auto_aplicar: this.autoDiscount > 0 ? true : false,
+      ativo: Boolean(this.status),
+      cadastro_endereco_padrao: {
+        ...this.adressData,
+        descricao: this.description,
+        endereco: this.adress,
+        endereco_numero: this.number,
+        endereco_bairro: this.neighborhood,
+        endereco_cep: this.cep,
+        endereco_municipio_codigo_ibge: parseInt(this.adressIBGE),
+        ie_produtor_rural: this.iePR,
+      },
+    };
+    this.clientService
+      .updateClient(clientsData, String(this.id))
+      .then((response: any) => {
+        if (response) {
+          alert('Cliente editado com sucesso');
+        }
+      });
   }
 }
