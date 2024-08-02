@@ -11,7 +11,7 @@ interface Value {
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
 })
-export class AddComponent {
+export class AddComponent{
   id: number = 0;
   registerType: string = '';
   personType: string = '';
@@ -31,7 +31,7 @@ export class AddComponent {
   adress: string = '';
   neighborhood: string = '';
   number: string = '';
-  ie: string = '';
+  iePR: string = '';
   description: string = '';
 
   registersType: Value[] = [
