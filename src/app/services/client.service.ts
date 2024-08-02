@@ -7,6 +7,7 @@ export class ClientService {
   private loginURL = 'https://desenvolvimento.maxdata.com.br/api/v1/Auth/login';
   private cadastroURL =
     'https://desenvolvimento.maxdata.com.br/api/v1/Cadastro';
+  private cepURL = 'https://opencep.com/v1'
 
   constructor() {}
 
@@ -74,5 +75,12 @@ export class ClientService {
         Authorization: `Bearer ${this.getToken()}`,
       },
     }).then((response) => response.json());
+  }
+
+  getCEP(cep:any){
+    const url = `${this.cepURL}/${cep}`
+    return fetch(url,{
+      method: 'GET'
+    }).then((response) => response.json())
   }
 }
