@@ -128,34 +128,30 @@ export class EditComponent implements OnInit {
   }
 
   saveData() {
-    let clientsData = {
-      ...this.clientData,
-      id: this.id,
-      nome: this.clientName,
-      fantasia: this.clientFantasy,
-      tipo_pessoa: this.personType,
-      tipo_cadastro: this.registerType,
-      cadastro_tipo_id: parseInt(this.clientType),
-      cpf_cnpj: this.clientCPF_CNPJ,
-      rg_ie: this.clientRG,
-      fone: this.clientPhone,
-      celular: this.clientCellphone,
-      chk_alterar_nome: Boolean(this.alterName),
-      desconto_auto_aplicar: this.autoDiscount > 0 ? true : false,
-      ativo: Boolean(this.status),
-      cadastro_endereco_padrao: {
-        ...this.adressData,
-        descricao: this.description,
-        endereco: this.adress,
-        endereco_numero: this.number,
-        endereco_bairro: this.neighborhood,
-        endereco_cep: this.cep,
-        endereco_municipio_codigo_ibge: parseInt(this.adressIBGE),
-        ie_produtor_rural: this.iePR,
-      },
-    };
+    this.clientData.id = this.id;
+    this.clientData.nome = this.clientName;
+    this.clientData.fantasia = this.clientFantasy;
+    this.clientData.tipo_pessoa = this.personType;
+    this.clientData.tipo_cadastro = this.registerType;
+    this.clientData.cadastro_tipo_id = parseInt(this.clientType);
+    this.clientData.cpf_cnpj = this.clientCPF_CNPJ;
+    this.clientData.rg_ie = this.clientRG;
+    this.clientData.fone = this.clientPhone;
+    this.clientData.celular = this.clientCellphone;
+    this.clientData.chk_alterar_nome = Boolean(this.alterName);
+    this.clientData.desconto_auto_aplicar = this.autoDiscount > 0 ? true : false;
+    this.clientData.ativo = Boolean(this.status);
+
+    this.clientData.cadastro_endereco_padrao.descricao = this.description;
+    this.clientData.cadastro_endereco_padrao.endereco = this.adress;
+    this.clientData.cadastro_endereco_padrao.endereco_numero = this.number;
+    this.clientData.cadastro_endereco_padrao.endereco_bairro = this.neighborhood;
+    this.clientData.cadastro_endereco_padrao.endereco_cep = this.cep;
+    this.clientData.cadastro_endereco_padrao.endereco_municipio_codigo_ibge = parseInt(this.adressIBGE);
+    this.clientData.cadastro_endereco_padrao.ie_produtor_rural = this.iePR;
+
     this.clientService
-      .updateClient(clientsData, String(this.id))
+      .updateClient(this.clientData, String(this.id))
       .then((response: any) => {
         if (response) {
           alert('Cliente editado com sucesso');
