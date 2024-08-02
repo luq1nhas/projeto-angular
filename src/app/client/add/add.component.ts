@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientService } from 'src/app/services/client.service';
 
 
 interface Value {
@@ -62,4 +63,20 @@ export class AddComponent{
     { value: '2', view_value: 'Não Contribuinte' },
     { value: '3', view_value: 'Produtor Rural' },
   ];
+
+  constructor(
+    private clientService: ClientService,
+  ) {}
+
+  
+  loadCEP() {
+    this.clientService.getCEP(this.cep).then((response: any) => {
+      this.neighborhood = response.bairro;
+      this.cep = response.cep;
+      this.description = response.complemento;
+      this.country = response.localidade;
+      this.adress = response.logradouro;
+      this.uf = response.uf;
+    });
+  }
 }
