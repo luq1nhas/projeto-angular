@@ -49,7 +49,6 @@ export class ClientComponent {
       this.client = response.itens;
       this.dataSource = new MatTableDataSource(this.client);
       this.dataSource.paginator = this.paginator;
-      console.log(response)
     });
   }
 
