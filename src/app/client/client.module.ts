@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
-import { DeleteComponent } from './delete/delete.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgFor } from '@angular/common';
@@ -16,9 +15,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator'
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
-  declarations: [ClientComponent, AddComponent, EditComponent, DeleteComponent],
+  declarations: [ClientComponent, AddComponent, EditComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
@@ -31,7 +31,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     FormsModule,
     MatCardModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule
   ],
 })
 export class ClientModule {}
