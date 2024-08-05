@@ -53,8 +53,8 @@
         <mat-form-field appearance="outline">
           <mat-label>Tipo Cliente</mat-label>
           <mat-select [(ngModel)]="clientType">
-            <mat-option *ngFor="let client_type of clientsType" [value]="client_type.value">
-              {{ client_type.view_value }}
+            <mat-option *ngFor="let value of clientsType" [value]="value.value">
+              {{ value.view_value }}
             </mat-option>
           </mat-select>
         </mat-form-field>
