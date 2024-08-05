@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClientService } from 'src/app/services/client.service';
 
 interface Value {
@@ -11,10 +11,7 @@ interface Value {
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
 })
-export class AddComponent implements OnInit {
-  clients: any[] = [];
-
-  id: number = 0;
+export class AddComponent {
   registerType: string = '';
   personType: string = '';
   clientName: string = '';
@@ -68,15 +65,6 @@ export class AddComponent implements OnInit {
 
   constructor(private clientService: ClientService) {}
 
-  ngOnInit() {
-    this.loadClients();
-  }
-
-  loadClients() {
-    this.clientService.listClients().then((response: any) => {
-      this.clients = response.itens || [];
-    });
-  }
 
   loadCEP() {
     this.clientService.getCEP(this.cep).then((response: any) => {

@@ -84,4 +84,16 @@ export class ClientService {
       method: 'GET',
     }).then((response) => response.json());
   }
+
+  desactivateClient(client: any, id: number): Promise<any> {
+    const url = `${this.cadastroURL}/${id}`;
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+      body: JSON.stringify(client),
+    }).then((response) => response.json());
+  }
 }

@@ -159,4 +159,20 @@ export class EditComponent implements OnInit {
         }
       });
   }
+
+  desactivateClient(): void {
+    const bodyData = {
+      ...this.clientData,
+      ativo: false,
+      cadastro_endereco_padrao: {
+        ...this.adressData,
+      },
+    };
+
+    this.clientService.desactivateClient(bodyData, this.id).then((response: any) => {
+      if (response) {
+        alert('Cliente desativado com sucesso');
+      }
+    });
+  }
 }
