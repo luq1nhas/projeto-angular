@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'projeto-angular';
 
-  constructor(private router: Router, private clientService: ClientService) {
+  constructor( private clientService: ClientService) {
     this.clientService.login();
   }
 }

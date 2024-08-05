@@ -35,14 +35,14 @@ export class ClientService {
     return localStorage.getItem('access_token');
   }
 
-  addClient(newClient: { [key: string]: any }) {
+  createClient(client: any): Promise<any> {
     return fetch(this.cadastroURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.getToken()}`,
       },
-      body: JSON.stringify(newClient),
+      body: JSON.stringify(client),
     }).then((response) => response.json());
   }
 
@@ -59,7 +59,8 @@ export class ClientService {
   }
 
   listClients() {
-    return fetch(this.cadastroURL, {
+    const url = `${this.cadastroURL}?limit=400`;
+    return fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${this.getToken()}`,

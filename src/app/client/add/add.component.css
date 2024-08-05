@@ -63,3 +63,10 @@
   justify-content: space-between;
   margin-top: 25px;
 }
+
+.save-button{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 5px;
+}

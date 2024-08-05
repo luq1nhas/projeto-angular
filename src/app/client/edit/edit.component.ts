@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
   number: string = '';
   iePR: string = '';
   description: string = '';
-  adressIBGE: string = 'F';
+  adressIBGE: string = '';
 
   registersType: Value[] = [
     { value: 'Cliente', view_value: 'Cliente' },
@@ -124,6 +124,7 @@ export class EditComponent implements OnInit {
       this.country = response.localidade;
       this.adress = response.logradouro;
       this.uf = response.uf;
+      this.adressIBGE = response.cadastro_endereco_padrao.endereco_municipio_codigo_ibge;
     });
   }
 
