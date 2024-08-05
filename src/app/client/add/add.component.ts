@@ -65,7 +65,6 @@ export class AddComponent {
 
   constructor(private clientService: ClientService) {}
 
-
   loadCEP() {
     this.clientService.getCEP(this.cep).then((response: any) => {
       this.neighborhood = response.bairro;
@@ -166,8 +165,8 @@ export class AddComponent {
 
     this.clientService.createClient(bodyData).then((response: any) => {
       if (response) {
-          alert('Cliente criado com sucesso');
-        }
+        alert('Cliente criado com sucesso');
+      }
     });
   }
 }
