@@ -68,7 +68,6 @@ export class AddComponent {
   loadCEP() {
     this.clientService.getCEP(this.cep).then((response: any) => {
       this.neighborhood = response.bairro;
-      this.cep = response.cep;
       this.description = response.complemento;
       this.country = response.localidade;
       this.adress = response.logradouro;
@@ -163,10 +162,11 @@ export class AddComponent {
       },
     };
 
+    console.log('Dados enviados:', bodyData);
+
     this.clientService.createClient(bodyData).then((response: any) => {
-      if (response) {
-        alert('Cliente criado com sucesso');
-      }
+      alert('Cliente criado com sucesso');
+      console.log('Resposta do servidor:', response);
     });
   }
 }

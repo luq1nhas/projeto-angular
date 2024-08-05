@@ -35,7 +35,7 @@ export class ClientService {
     return localStorage.getItem('access_token');
   }
 
-  createClient(client: any) {
+  createClient(client: any): Promise<any> {
     return fetch(this.cadastroURL, {
       method: 'POST',
       headers: {
@@ -43,18 +43,19 @@ export class ClientService {
         Authorization: `Bearer ${this.getToken()}`,
       },
       body: JSON.stringify(client),
-    }).then((response) => response.json());
+    })
+    .then((response) => response.json())
   }
 
-  updateClient(client: { [key: string]: any }, id: string) {
-    const url = `${this.cadastroURL}/${client['id']}`;
+  updateClient(updatedClient: { [key: string]: any }, id: string) {
+    const url = `${this.cadastroURL}/${updatedClient['id']}`;
     return fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.getToken()}`,
       },
-      body: JSON.stringify(client),
+      body: JSON.stringify(updatedClient),
     }).then((response) => response.json());
   }
 
@@ -83,6 +84,7 @@ export class ClientService {
     return fetch(url, {
       method: 'GET',
     }).then((response) => response.json());
+  
   }
 
   desactivateClient(client: any, id: number) {
